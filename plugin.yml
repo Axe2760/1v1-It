@@ -1,0 +1,8 @@
+name: 1v1 It
+author: Axe2760
+version: 1.0
+prefix: 1v1 It
+main: us.axe2760.pvprequests.PvPRequests
+commands:
+  1v1:
+    usage: /1v1 <name>, /1v1 <accept/deny>
