@@ -1,6 +1,7 @@
 package us.axe2760.pvprequests;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -78,6 +80,17 @@ public class PlayerListener implements Listener{
 				}
 				else{
 					event.setCancelled(false);
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void interact(PlayerInteractEvent e){
+		if (e.getClickedBlock() != null){
+			if (e.getClickedBlock().getType().equals(Material.CHEST)){
+				if (Manager.isInBattle(e.getPlayer())){
+					e.setCancelled(true);
 				}
 			}
 		}
