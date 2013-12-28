@@ -16,6 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerListener implements Listener{
 	
+	private int[] invIds = new int[]{23, 54, 58, 61, 62, 130, 145, 146, 158, 342, 343};
 	
 	//so players can't break blocks
 	@EventHandler
@@ -88,10 +89,14 @@ public class PlayerListener implements Listener{
 	@EventHandler
 	public void interact(PlayerInteractEvent e){
 		if (e.getClickedBlock() != null){
-			if (e.getClickedBlock().getType().equals(Material.CHEST)){
-				if (Manager.isInBattle(e.getPlayer())){
-					e.setCancelled(true);
+			if (Manager.isInBattle(e.getPlayer())){
+				for (int id : invIds){
+					if (e.getClickedBlock().getTypeId() == id){
+						e.setCancelled(true);
+						return;
+					}
 				}
+				//else, continue
 			}
 		}
 	}
